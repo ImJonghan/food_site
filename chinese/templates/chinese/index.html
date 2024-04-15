@@ -1,4 +1,13 @@
 <h1>Lion 중화요리에 오신것을 환영합니다!!</h1>
+
+<form action="/c/upload/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="file">파일 업로드:</label>
+    <input type="file" id="file" name="file">
+    <input type="submit" value="Upload File">
+</form>
+  
+
 <form action="" method="post">
     {% csrf_token %}
     <div>
@@ -9,6 +18,7 @@
           <option value="요리류">요리류</option>
         </select>
     </div>
+
     <div>
     <label for="name">음식이름:</label>
     <input type="text" name="lion_name">

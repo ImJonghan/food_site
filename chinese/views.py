@@ -1,7 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Food, Category
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
+
+def upload(request):
+    fs=FileSystemStorage()
+    uploaded_file = request.FILES['file']
+    name = fs.save(uploaded_file.name, uploaded_file)
+    url = fs.url(name)
+    return HttpResponse("{}에 저장이 잘 되었습니다.".format(url))
 
 def index(request):
     # get(그냥 주소 입력해서 오면) -> 페이지만 보여주고
@@ -12,7 +20,10 @@ def index(request):
     elif request.method=='POST':
         # Food.objects.create(name='라떼')
         # request.POST['lion_name']
+        # Category 인스턴스 가져오는 영역
         category = Category.objects.get(name=request.POST['category'])
+
+        # Food 내용을 구성 영역
         food_name = request.POST['lion_name']
         food_price = request.POST['price']
         food_description = request.POST['description']
