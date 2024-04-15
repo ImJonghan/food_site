@@ -1,6 +1,5 @@
 from django.urls import path, include
 from . import views
 urlpatterns = [
-    path("", views.index),
-    path("upload/", views.upload),
+    path("add_food/", views.add_food, name='add_food'),
 ]

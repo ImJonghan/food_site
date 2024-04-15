@@ -9,3 +9,4 @@ class Food(models.Model):
     name=models.CharField(max_length=20)
     price = models.IntegerField()
     description = models.TextField()
+    image_url = models.URLField()
