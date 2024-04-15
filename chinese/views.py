@@ -35,5 +35,16 @@ def add_food(request):
         url = fs.url(name)
 
         Food.objects.create(category= category,name=food_name, price =food_price , description=food_description,image_url=url)        
-        return redirect('index')       
-   
+        return redirect('index')      
+
+def food_delete(request, pk):
+    object = Food.objects.get(pk=pk)
+    object.delete()
+    return redirect('index')      
+
+def food_detail(request, pk):
+    object = Food.objects.get(pk=pk)
+    context = {
+        'object':object
+    }
+    return render(request, 'chinese/food_detail.html', context)

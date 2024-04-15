@@ -6,39 +6,38 @@
 <title>Lion 중화요리</title>
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .img-preview {
+        width: 100%;
+        max-width: 200px; /* 이미지 미리보기 크기 설정 */
+        height: auto;
+        margin-top: 10px;
+    }
+</style>
 </head>
 <body>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Lion 중화요리에 오신 것을 환영합니다!!</h1>
 
-    <form class="mb-3">
-        <div class="mb-3">
-            <label for="birthday" class="form-label">생일:</label>
-            <input type="date" id="birthday" name="birthday" class="form-control">
-        </div>
-        <div class="text-center">
-            <input type="submit" value="제출" class="btn btn-primary">
-        </div>
-    </form>
-
     <form action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="category" class="form-label">카테고리 선택:</label>
-            <select name="category" class="form-select">
-                <option value="면류">면류</option>
-                <option value="식사류">식사류</option>
-                <option value="요리류">요리류</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="name" class="form-label">음식이름:</label>
-            <input type="text" name="lion_name" class="form-control" id="name">
-        </div>
-        <div class="mb-3">
-            <label for="price" class="form-label">가격:</label>
-            <input type="text" name="price" class="form-control" id="price">
+        <div class="row g-3 mb-3">
+            <div class="col-md-4">
+                <label for="category" class="form-label">카테고리 선택:</label>
+                <select name="category" class="form-select">
+                    <option value="면류">면류</option>
+                    <option value="식사류">식사류</option>
+                    <option value="요리류">요리류</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="name" class="form-label">음식이름:</label>
+                <input type="text" name="lion_name" class="form-control" id="name">
+            </div>
+            <div class="col-md-4">
+                <label for="price" class="form-label">가격:</label>
+                <input type="text" name="price" class="form-control" id="price">
+            </div>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">소개:</label>
@@ -46,7 +45,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label">사진을 올려주세요</label>
-            <input type="file" name="file" class="form-control">
+            <input type="file" name="file" class="form-control" id="file" onchange="previewFile()">
+            <img id="preview" src="" class="img-preview" alt="Image preview">
         </div>
         <div class="text-center">
             <input type="submit" value="제출" class="btn btn-success">
@@ -56,5 +56,22 @@
 
 <!-- Bootstrap JS with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function previewFile() {
+    const preview = document.getElementById('preview');
+    const file = document.getElementById('file').files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "";
+    }
+}
+</script>
 </body>
 </html>
