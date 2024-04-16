@@ -41,7 +41,7 @@
             <h2>{{ object.name }}</h2>
             <h3 class="text-muted">{{ object.price }}원</h3>
             <p>{{ object.description }}</p>
-            <form action="{% url 'food_delete' pk=object.id %}" method="post">
+            <form action="{% url 'chinese:food_delete' pk=object.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" value="삭제하기" class="btn-custom">
             </form>
